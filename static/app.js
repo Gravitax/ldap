@@ -4,14 +4,12 @@ const			api_set_response = (response = null) => {
 	const	api_response = document.getElementById("api_response");
 
 	if (response != null && api_response != null) {
-		let		status = response.detail != undefined ? 400 : response.status;
-		let		message = response.message || response.detail;
+		const	status = response.detail != undefined ? 400 : response.status;
+		const	message = response.message || response.detail;
 
 		api_response.innerHTML = `status: ${status} - ${message}`;
-		if (response.detail != undefined)
-			return (false);
 	}
-	return (true);
+	return (response.detail == undefined);
 };
 
 async function	login() {
