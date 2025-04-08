@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Gestion des utilisateurs</title>
+		<link rel="stylesheet" href="/static/style.css">
+	</head>
+	<body>
+
+		<div id="elt_login">
+			<h1>Connexion</h1>
+			<input type="text" id="login" placeholder="Login">
+			<input type="password" id="password" placeholder="Password">
+			<button onclick="login()">Se connecter</button>
+		</div>
+		
+		
+		<div id="elt_content" class="hidden">
+			<h2>HTPASSWD list</h2>
+			<button onclick="htpasswd_list()">load</button>
+			<ul id="htpasswd_list"></ul>
+			
+			<h3>HTPASSWD add</h3>
+			<input type="text" id="htpasswd_new" placeholder="username">
+			<button onclick="htpasswd_add()">add</button>
+			
+			<br /><br />
+			<button onclick="delog()">Disconnect</button>
+		</div>
+
+		<p id="api_response"></p>
+		
+		<script src="/static/app.js"></script>
+	</body>
+</html>
