@@ -6,5 +6,5 @@ uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ----------
 
 users:
-admin - admin
+admin - admin ; 
 test - test (aucun droit)
