@@ -64,7 +64,7 @@ async function	htpasswd_list() {
 			li.appendChild(btn);
 			list.appendChild(li);
 		});
-	}, 1000);
+	}, 500);
 };
 
 async function	htpasswd_add() {
