@@ -3,13 +3,9 @@ let				_TOKEN = null;
 const			api_set_response = (response = null) => {
 	const	api_response = document.getElementById("api_response");
 
-	if (response != null && api_response != null) {
-		const	status = response.detail != undefined ? 400 : response.status;
-		const	message = response.message || response.detail;
-
-		api_response.innerHTML = `status: ${status} - ${message}`;
-	}
-	return (response.detail == undefined);
+	if (response != null && api_response != null) 
+		api_response.innerHTML = `status: ${response.status} - ${response.message}`;
+	return (response.message != "invalid token");
 };
 
 async function	login() {
@@ -51,21 +47,24 @@ async function	htpasswd_list() {
 		method	: "GET",
 	});
 	const	data = await response.json();
-	const	list = document.getElementById("htpasswd_list");
+	
+	setTimeout(() => {
+		if (api_set_response(data) == false)
+			return ;
+		const	list = document.getElementById("htpasswd_list");
 
-	if (api_set_response(data) == false)
-		return ;
-	list.innerHTML = "";
-	data.forEach(user => {
-		const	li = document.createElement("li");
-		const	btn = document.createElement("button");
-
-		li.textContent = `${user.username} - ${user.password}`;
-		btn.textContent = "delete";
-		btn.onclick = () => htpasswd_delete(user.username);
-		li.appendChild(btn);
-		list.appendChild(li);
-	});
+		list.innerHTML = "";
+		data.data.forEach(user => {
+			const	li = document.createElement("li");
+			const	btn = document.createElement("button");
+	
+			li.textContent = `${user.username} - ${user.password}`;
+			btn.textContent = "delete";
+			btn.onclick = () => htpasswd_delete(user.username);
+			li.appendChild(btn);
+			list.appendChild(li);
+		});
+	}, 1000);
 };
 
 async function	htpasswd_add() {
